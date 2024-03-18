@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>RGB SLIDER</title>
+  </head>
+  <body class="flex items-center justify-center h-screen">
+    <div class="bg-white mx-auto w-fit px-10 py-5 rounded drop-shadow-xl">
+      <div class="flex gap-x-2 justify-center">
+        <p class="font-semibold text-xl">R</p>
+        <input min="0" max="255" type="range" name="" id="input-red" />
+      </div>
+      <div class="flex gap-x-2 justify-center">
+        <p class="font-semibold text-xl">G</p>
+        <input min="0" max="255" type="range" name="" id="input-green" />
+      </div>
+      <div class="flex gap-x-2 justify-center">
+        <p class="font-semibold text-xl">B</p>
+        <input min="0" max="255" type="range" name="" id="input-blue" />
+      </div>
+      <div class="flex justify-center gap-x-2">
+        <p id="color-rgb-code" class="my-auto">rgb(0, 0, 0)</p>
+        <button
+          id="btn-copy"
+          class="bg-blue-600 py-2 px-3 rounded text-white font-semibold my-2"
+        >
+          copy color code
+        </button>
+      </div>
+    </div>
+  </body>
+
+  <script src="app.js"></script>
+</html>
