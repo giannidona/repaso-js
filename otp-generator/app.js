@@ -38,10 +38,30 @@ function verifyCode() {
   if (userInput === code) {
     document.body.style.backgroundColor = "green";
     checkCodeBtn.innerText = "accepted code";
+    generateCode();
+    resetValues();
+    resetInputValues();
   } else {
     document.body.style.backgroundColor = "red";
     checkCodeBtn.innerText = "denied code";
+    resetValues();
+    resetInputValues();
   }
+}
+
+function resetValues() {
+  setTimeout(() => {
+    document.body.style.backgroundColor = "black";
+    checkCodeBtn.innerText = "confirm";
+  }, 1500);
+}
+
+function resetInputValues() {
+  setTimeout(() => {
+    inputs.forEach((input) => {
+      input.value = "";
+    });
+  }, 1500);
 }
 
 inputValues();
