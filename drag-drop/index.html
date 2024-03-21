@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Document</title>
+  </head>
+  <body class="bg-black text-white flex items-center justify-center h-screen">
+    <div class="w-72">
+      <form class="my-5" action="">
+        <input
+          class="w-full rounded px-5 py-1 text-black"
+          placeholder="To-Do List"
+          type="text"
+          name=""
+          id="todo-input"
+        />
+        <button
+          id="btn-add"
+          class="w-full mt-2 bg-white text-black rounded font-semibold py-1 border-2 border-white hover:bg-black hover:text-white"
+          type="submit"
+        >
+          ADD
+        </button>
+      </form>
+      <div id="container">
+        <!-- <div
+          id="card"
+          class="bg-white rounded w-full text-black px-5 py-1 text-wrap"
+        >
+          <p class="font-semibold">TODO</p>
+        </div> -->
+      </div>
+    </div>
+  </body>
+  <script src="app.js"></script>
+</html>
