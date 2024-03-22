@@ -1,7 +1,6 @@
 const input = document.getElementById("todo-input");
 const btn = document.getElementById("btn-add");
 const container = document.getElementById("container");
-const card = document.getElementById("card");
 
 const list = [];
 let dragged;
@@ -16,21 +15,22 @@ btn.addEventListener("click", (value) => {
 
 function renderList() {
   container.innerHTML = "";
-  list.map((todo, index) => {
-    let card = document.createElement("div");
-    card.innerHTML = `
-    <div
-    id=${index}
-    class="card bg-white rounded w-full text-black px-5 py-1 text-wrap hover:cursor-move z-20"
-    draggable="true">
-        <p class="font-semibold">${todo}</p>
-    </div>
-  
-    <div class="dropzone my-2 rounded w-full h-10 text-black text-wrap hover:cursor-move z-10" droppable="true"></div>
-    `;
-
-    container.appendChild(card);
+  const ul = document.createElement("ul");
+  ul.className = "list-group";
+  list.forEach((todo, index) => {
+    const li = document.createElement("li");
+    li.className = "list-group-item";
+    li.innerHTML = `
+            <p
+                id=${index}
+                class="card bg-white rounded w-full text-black px-5 py-1 my-2 text-wrap hover:cursor-move z-20 font-bold"
+                draggable="true">
+                ${todo}
+            </p>
+        `;
+    ul.appendChild(li);
   });
+  container.appendChild(ul);
 
   dragAndDrop();
 }
@@ -40,21 +40,31 @@ function dragAndDrop() {
 
   cards.forEach((card) => {
     card.addEventListener("dragstart", (event) => {
-      dragged = event.target;
+      // se guarda el elemento padre para saber cual tarjeta esta en movimiento
+      dragged = event.target.parentElement;
     });
-  });
 
-  const dropzones = document.querySelectorAll(".dropzone");
-  dropzones.forEach((dropzone) => {
-    dropzone.addEventListener("dragover", (event) => {
+    card.addEventListener("dragover", (event) => {
+      // se previene el comportamiento default para que se pueda dropear la card
       event.preventDefault();
     });
 
-    dropzone.addEventListener("drop", (event) => {
+    card.addEventListener("drop", (event) => {
+      // nos fijamos si target es diferente a las tarjetas que estan en la lista
+      // depende el index se define si la card que esta en movimiento queda por arriba o por debajo
       event.preventDefault();
-      if (dragged) {
-        event.target.appendChild(dragged);
-        dragged = null;
+      const target = event.target.parentElement;
+
+      if (dragged && dragged !== target) {
+        const parent = dragged.parentElement;
+        const draggedIndex = Array.from(parent.children).indexOf(dragged);
+        const targetIndex = Array.from(parent.children).indexOf(target);
+
+        if (draggedIndex < targetIndex) {
+          parent.insertBefore(dragged, target.nextSibling);
+        } else {
+          parent.insertBefore(dragged, target);
+        }
       }
     });
   });
